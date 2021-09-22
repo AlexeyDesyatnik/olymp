@@ -3,6 +3,7 @@
 # Всё ещё не проходит по времени, но существенно лучше простого решения
 
 from math import sqrt
+from itertools import islice
 
 LIMIT = 16_000_000
 bits = bytearray(b"\x01") * ((LIMIT + 1) // 2)
@@ -20,14 +21,13 @@ while factor <= q:
 
     factor += 1
 
+def get_primes():
+    yield 2
+    n = 1
+    while n > 0:
+        yield n * 2 + 1
+        n = bits.find(1, n + 1)
+
 K = int(input())
-prime_count = 1
-prime = 2
-n = 1
-while n > 0:
-    if prime_count == K:
-        print(prime)
-        break
-    prime = n * 2 + 1
-    prime_count += 1
-    n = bits.find(1, n + 1)
+primes = list(islice(get_primes(), K))
+print(primes[-1])
