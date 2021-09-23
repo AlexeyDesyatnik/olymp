@@ -29,19 +29,21 @@ def MakeSieve():
         amount = math.ceil((SIEVE_SIZE - start) / step)
         sieve[start :: step] = [False] * amount
 
-# Проверка: простые числа меньше 100
+# Проверка: простые числа меньше 50
 primes_under_50 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
-def GetPrimes(upper_boundary=50):
-    yield 2
-    for p in range(3, upper_boundary, 2):
-        if sieve[p // 2]:
-            yield p
+def GetNthPrime(n):
+    if n == 1:
+        return 2
+    prime_count = 1
+    i = 0
+    while prime_count < n:
+        i = sieve.index(True, i + 1)
+        prime_count += 1
+    return i * 2 + 1
 
-t1 = time()
+k = int(input())
 MakeSieve()
-t2 = time()
-print(t2 - t1)
-primes = list(GetPrimes())
-print(primes)
-print("CORRECT" if primes == primes_under_50 else "ERROR")
+prime = GetNthPrime(k)
+print(prime)
+
