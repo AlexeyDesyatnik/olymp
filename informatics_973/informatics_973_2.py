@@ -18,7 +18,7 @@ from time import time
 
 LIMIT = 15_500_000
 SIEVE_SIZE = LIMIT + 1
-sieve = [True] * SIEVE_SIZE
+sieve = bytearray(b'\x01' * SIEVE_SIZE)
 
 def MakeSieve():
     for p in range(3, int(math.sqrt(SIEVE_SIZE) + 1), 2):
@@ -27,7 +27,7 @@ def MakeSieve():
         start = (3 * p) // 2
         step = p
         amount = math.ceil((SIEVE_SIZE - start) / step)
-        sieve[start :: step] = [False] * amount
+        sieve[start::step] = b'\x00' * amount
 
 # Проверка: простые числа меньше 50
 primes_under_50 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
@@ -38,7 +38,7 @@ def GetNthPrime(n):
     prime_count = 1
     i = 0
     while prime_count < n:
-        i = sieve.index(True, i + 1)
+        i = sieve.index(1, i + 1)
         prime_count += 1
     return i * 2 + 1
 
