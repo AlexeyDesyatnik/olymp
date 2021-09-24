@@ -12,6 +12,8 @@
 # 5-я оптимизация требует 4-ю для корректной работы
 # 6. Заполнение решета через срезы
 # 0.5 сек на заполнение
+# 7. Переход к следующему простому при заполнении решета через index вместо цикла,
+# начало заполнения не с 3p, а с p**2. Эффект в пределах погрешности.
 
 import math
 from time import time
@@ -26,7 +28,7 @@ def MakeSieve():
     while i < stop:
         i = sieve.index(b'\x01', i + 1)
         p = 2 * i + 1
-        start = (3 * p) // 2
+        start = (p * p) // 2
         step = p
         amount = math.ceil((SIEVE_SIZE - start) / step)
         sieve[start::step] = b'\x00' * amount
@@ -44,12 +46,7 @@ def GetNthPrime(n):
         prime_count += 1
     return i * 2 + 1
 
-# k = int(input())
-t1 = time()
+k = int(input())
 MakeSieve()
-t2 = time()
-print(t2 - t1)
-# prime = GetNthPrime(k)
-# print(prime)
-
-print(GetNthPrime(1000000))
+prime = GetNthPrime(k)
+print(prime)
