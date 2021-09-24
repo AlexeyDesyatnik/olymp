@@ -6,6 +6,11 @@
 bin/
 obj/
 
+# Visual C++ files
+*.exe
+*.ilk
+*.obj
+*.pdb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
