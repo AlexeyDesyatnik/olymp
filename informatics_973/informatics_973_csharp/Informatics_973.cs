@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using static System.Math;
 
 namespace informatics_973_csharp
@@ -8,10 +9,10 @@ namespace informatics_973_csharp
         const int LIMIT = 15485864;
         const int SIEVE_SIZE = LIMIT / 2 + 1;
 
-        static bool[] sieve = new bool[SIEVE_SIZE];
+        static BitArray sieve = new BitArray(SIEVE_SIZE);
 
         static void MakeSieve() {
-            Array.Fill(sieve, true);
+            sieve.SetAll(true);
             int stop = (int)(Sqrt(LIMIT) + 1);
             for (int p = 3; p <= stop; p += 2) {
                 if (!sieve[p / 2]) continue;
