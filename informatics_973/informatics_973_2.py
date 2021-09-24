@@ -21,9 +21,11 @@ SIEVE_SIZE = LIMIT + 1
 sieve = bytearray(b'\x01' * SIEVE_SIZE)
 
 def MakeSieve():
-    for p in range(3, int(math.sqrt(SIEVE_SIZE) + 1), 2):
-        if not sieve[p // 2]:
-            continue
+    stop = int(math.sqrt(SIEVE_SIZE) + 1)
+    i = 0
+    while i < stop:
+        i = sieve.index(b'\x01', i + 1)
+        p = 2 * i + 1
         start = (3 * p) // 2
         step = p
         amount = math.ceil((SIEVE_SIZE - start) / step)
@@ -42,8 +44,12 @@ def GetNthPrime(n):
         prime_count += 1
     return i * 2 + 1
 
-k = int(input())
+# k = int(input())
+t1 = time()
 MakeSieve()
-prime = GetNthPrime(k)
-print(prime)
+t2 = time()
+print(t2 - t1)
+# prime = GetNthPrime(k)
+# print(prime)
 
+print(GetNthPrime(1000000))
