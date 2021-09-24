@@ -1,6 +1,12 @@
 # VS Code settings
 .vscode/
 
+### DotnetCore ###
+# .NET Core build folders
+bin/
+obj/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
